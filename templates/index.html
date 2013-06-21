@@ -1,0 +1,69 @@
+<html>  
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link href="/css/site.css" rel="stylesheet" type="text/css" />
+    <title>Track My Stuff</title>
+  </head>
+  
+  <body>
+    <div id="header">
+      <p><img src="images/magnify_sm.png"></p>    
+      <h1>Track My Stuff</h1>
+      <p>A demo CRUD application written using Groovy and Ratpack.</p>
+      <hr/>    
+    </div>
+
+<!-- For Now, just hardcode some data -->	
+<% 
+def itemList = new ArrayList()
+
+def item = new Item()
+item.id = 1
+item.name = "Groovy in Action"
+item.itemType = "Book"
+item.itemLocation_1 = "Bookshelf 3"
+item.itemLocation_2 = "Shelf 5"
+item.description = "The best guide to learning Groovy"
+item.createdAt = new Date()
+
+itemList.add(item)
+
+def item_2 = new Item()
+item_2.id = 2
+item_2.name = "This is Spinal Tap"
+item_2.itemType = "DVD"
+item_2.itemLocation_1 = "DVD Case 12"
+item_2.itemLocation_2 = "Shelf 2"
+item_2.description = "This one goes to 11"
+item_2.createdAt = new Date()
+
+itemList.add(item_2)
+%>
+
+  <table class="gridtable">
+    <tr>
+      <th>ID</th><th>NAME</th><th>TYPE</th><th>PRIMARY LOCATION</th><th>SECONDARY LOCATION</th><th>EDIT</th><th>DELETE</th>
+    </tr>
+
+<%itemList.each() { %>
+    <tr>
+      <td>${it.id}</td>
+      <td>${it.name}</td>
+      <td>${it.itemType}</td>
+      <td>${it.itemLocation_1}</td>
+      <td>${it.itemLocation_2}</td>
+	  
+      <td><a href="/edit/it.id"><img src="images/edit.png" /></td>
+   	  <td><a href="/delete/it.id"><img src="images/delete.png" /></td>
+    </tr>
+<% }%>
+
+</table>
+
+<br>
+<br>
+<p><a href="/new">Add a New Item!</a></p>
+
+</body>
+
+</html>
