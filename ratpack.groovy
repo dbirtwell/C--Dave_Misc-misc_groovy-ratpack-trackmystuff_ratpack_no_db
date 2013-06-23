@@ -11,8 +11,6 @@ ratpack {
     }
     
     handlers {
-        // Only initialize this once
-        // def util = new TarotDeckUtil()
 
         // default route
         get {
@@ -23,15 +21,15 @@ ratpack {
             get(TemplateRenderer).render "new.html", title: "Groovy Track My Stuff"
 		}
 
-        //// Actual dynamic part
-        //get ("tarot") {
-        //    def card = util.randomCard()
-        //    get(TemplateRenderer).render "tarot.html", name: card.name, meaning: card.meaning, image: "images\\$card.image"
-        //}
-
-        get ("about") {
-            get(TemplateRenderer).render "about.html", title: "Groovy Track My Stuff"
-        }
+		// http://localhost:5050/edit/23
+        get("edit/:id"){
+          get(TemplateRenderer).render "edit.html", id: "${pathTokens.id}"
+        }		
+		
+		// http://localhost:5050/edit/2
+        get("delete/:id"){
+          get(TemplateRenderer).render "delete.html", id: "${pathTokens.id}"
+        }				
 
         assets "public"
     }
