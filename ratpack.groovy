@@ -32,19 +32,38 @@ ratpack {
 
 		// http://localhost:5050/edit/23
         get("edit/:id"){
+		  // TODO: retrieve the item and passs along the info to populate the form
           get(TemplateRenderer).render "edit.html", id: "${pathTokens.id}"
         }		
 		
 		// http://localhost:5050/edit/2
         get("delete/:id"){
+		  // TODO: retrieve the item and get the name and any other info
+          // get(TemplateRenderer).render "delete.html", id: "${pathTokens.id}", name: ${pathTokens.name}
           get(TemplateRenderer).render "delete.html", id: "${pathTokens.id}"
         }
 		
+		// Data posted from a form
 		post ("submit") {
             // get(TemplateRenderer).render "index.html", title: "Groovy Track My Stuff"
 			def form = request.form
             response.send "Now saving: " + form.name + " of type: " + form.item_type
         }								
+
+		// --------------------------------------------------------------------
+		// POSTs
+		// --------------------------------------------------------------------
+		
+        //// ??? Is this correct?		
+		//post ("delete/delete/:id") {
+        //    response.send "Now deleting ID: ${pathTokens.id}"
+        //}							
+		
+        // ??? Is this correct?
+		// http://localhost:5050/delete/item/1
+		post ("delete/item/:id") {
+            response.send "Now deleting item with ID: ${pathTokens.id}"
+        }									
 
         assets "public"
     }
